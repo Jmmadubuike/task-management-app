@@ -21,14 +21,18 @@ const taskSchema = new mongoose.Schema(
     completed: {
       type: Boolean,
       default: false,
+      index: true,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+      index: true,
     },
   },
   { timestamps: true }
 );
+
+taskSchema.index({ user: 1, completed: 1 });
 
 module.exports = mongoose.model("Task", taskSchema);

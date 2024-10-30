@@ -4,6 +4,7 @@ const {
   getAllTasks,
   getTaskById,
   updateTask,
+  markTaskAsCompleted,
   deleteTask,
 } = require("../controllers/taskController");
 const authMiddleware = require("../middlewares/authMiddleware");
@@ -19,8 +20,11 @@ router.get("/", authMiddleware, getAllTasks);
 // Route to get a specific task by ID
 router.get("/:id", authMiddleware, getTaskById);
 
-// Route to update a task by ID
+// Route to update a task by ID (including marking as completed)
 router.put("/:id", authMiddleware, updateTask);
+
+// Route to mark a task as completed
+router.patch("/:id/completed", authMiddleware, markTaskAsCompleted);
 
 // Route to delete a task by ID
 router.delete("/:id", authMiddleware, deleteTask);
